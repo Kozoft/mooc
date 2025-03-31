@@ -1,10 +1,11 @@
 package tasks
 
-import "testing"
+import (
+	"testing"
+)
 
 func Test11(t *testing.T) {
 	inout := map[string]string{
-		"Test":                  "Success",
 		"[]":                    "Success",
 		"{}[]":                  "Success",
 		"[()]":                  "Success",
@@ -22,11 +23,16 @@ func Test11(t *testing.T) {
 		"(a{wellow[submarine]}": "1",
 		"yellowsubmarine]]]":    "16",
 		"{{[()]}":               "1",
+		"([](){([])})":          "Success",
+		"()[]}":                 "5",
+		"{{[()]]":               "7",
+		"":                      "Success",
 	}
 	for in, out := range inout {
+		// fmt.Println("in:", in, "out:", out)
 		msg := Task11(in)
 		if msg != out {
-			t.Errorf("%s: '%s', not '%s'", in, msg, out)
+			t.Errorf("%s: %s, not %s", in, msg, out)
 		} else {
 			t.Logf("%s", in)
 		}
